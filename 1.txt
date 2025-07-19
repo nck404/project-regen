@@ -1,0 +1,13 @@
+#scene ./img/scen/rooftop.jpg
+
+
+[Lena] I never thought it would come to this...
+[Kai:angry] Lena? What are you doing up here?
+
+#scene ./img/scen/w.jpg
+
+[Lena] *sigh* It's the project... I messed up.
+
+
+
+[Kai] Wait, what? Why didn't you tell me?
