@@ -1,7 +1,8 @@
 #scene ./img/scen/rooftop.jpg
 
+#music ./bgm/bg1.mp3
 
-[Lena] I never thought it would come to this...
+[Lena] Tại sao t phải sống như này nhỉ
 [Kai:angry] Lena? What are you doing up here?
 
 #scene ./img/scen/w.jpg

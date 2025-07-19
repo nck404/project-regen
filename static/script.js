@@ -37,9 +37,7 @@ async function loadStoryFromText(url) {
         const [_, character, emotion, text] = match;
         if (currentScene.character) {
           scenes.push({ ...currentScene });
-          currentScene = currentScene.scene
-            ? { scene: currentScene.scene }
-            : {};
+          currentScene = currentScene.scene ? { scene: currentScene.scene } : {};
         }
         currentScene.character = character;
         currentScene.emotion = emotion || null;
@@ -65,34 +63,56 @@ function showDialogue(index) {
 
   if (index > 0) {
     const prev = story[index - 1];
-    const avatar = characters[prev.character] || "";
+    const isNarrator = prev.character?.toLowerCase() === "narrator";
+
     const historyEntry = document.createElement("div");
-    historyEntry.className = "flex space-x-4 items-start fade-in";
-    historyEntry.innerHTML = `
-    <div class="flex-shrink-0">
-      <img src="${avatar}" class="w-14 h-14 pixel-avatar object-cover">
-    </div>
-    <div class="flex-1">
-      <div class="char-name font-['Press+Start+2P'] text-[#eb6f92]">${prev.character}</div>
-      <div class="mt-1 text-[#e0def4] text-sm">${prev.text}</div>
-    </div>
-  `;
+    historyEntry.className = "fade-in mb-4";
+
+    if (isNarrator) {
+      historyEntry.innerHTML = `
+        <div class="text-white text-xl font-bold drop-shadow-[0_0_6px_white]">${prev.text}</div>
+      `;
+    } else {
+      const avatar = characters[prev.character] || "";
+      historyEntry.classList.add("flex", "space-x-4", "items-start");
+      historyEntry.innerHTML = `
+        <div class="flex-shrink-0">
+          <img src="${avatar}" class="w-14 h-14 pixel-avatar object-cover">
+        </div>
+        <div class="flex-1">
+          <div class="char-name font-['Press+Start+2P'] text-[#eb6f92]">${prev.character}</div>
+          <div class="mt-1 text-[#e0def4] text-sm">${prev.text}</div>
+        </div>
+      `;
+    }
+
     dialogueHistory.appendChild(historyEntry);
     dialogueHistory.scrollTop = dialogueHistory.scrollHeight;
   }
 
-  const avatar = characters[entry.character] || "";
-  currentDialogue.innerHTML = `
-  <div class="flex space-x-4 p-4">
-    <div class="flex-shrink-0">
-      <img src="${avatar}" class="w-16 h-16 pixel-avatar object-cover">
-    </div>
-    <div class="flex-1">
-      <div class="char-name font-['Press+Start+2P'] text-sm text-[#eb6f92] mb-1">${entry.character}</div>
-      <div id="typing-text" class="text-[#e0def4] leading-snug"></div>
-    </div>
-  </div>
-`;
+  const isNarrator = entry.character?.toLowerCase() === "narrator";
+  currentDialogue.innerHTML = "";
+
+  if (isNarrator) {
+    currentDialogue.innerHTML = `
+      <div class="p-4 fade-in">
+        <p id="typing-text" class="text-white text-2xl font-bold drop-shadow-[0_0_6px_white]"></p>
+      </div>
+    `;
+  } else {
+    const avatar = characters[entry.character] || "";
+    currentDialogue.innerHTML = `
+      <div class="flex space-x-4 p-4 fade-in">
+        <div class="flex-shrink-0">
+          <img src="${avatar}" class="w-16 h-16 pixel-avatar object-cover">
+        </div>
+        <div class="flex-1">
+          <div class="char-name font-['Press+Start+2P'] text-sm text-[#eb6f92] mb-1">${entry.character}</div>
+          <div id="typing-text" class="text-[#e0def4] leading-snug"></div>
+        </div>
+      </div>
+    `;
+  }
 
   const textEl = document.getElementById("typing-text");
   let i = 0;
@@ -123,6 +143,9 @@ function showDialogue(index) {
       playBGM(entry.bgm);
     }
   }
+
+  // 🔸 Lưu tiến trình mỗi lần hiển thị
+  localStorage.setItem("vn-progress", currentIndex);
 }
 
 nextBtn.addEventListener("click", () => {
@@ -142,15 +165,13 @@ nextBtn.addEventListener("click", () => {
 });
 
 document.getElementById("reset-btn").addEventListener("click", () => {
+  localStorage.removeItem("vn-progress");
   currentIndex = 0;
   location.reload();
 });
 
 document.addEventListener("click", (e) => {
-  if (
-    !e.target.closest("#dialogue-history") &&
-    e.target.id !== "next-btn"
-  ) {
+  if (!e.target.closest("#dialogue-history") && e.target.id !== "next-btn") {
     nextBtn.click();
   }
 });
@@ -167,5 +188,11 @@ Promise.all([
 ]).then(([charData, storyData]) => {
   characters = charData;
   story = storyData;
+
+  const saved = parseInt(localStorage.getItem("vn-progress"));
+  if (!isNaN(saved) && saved >= 0 && saved < story.length) {
+    currentIndex = saved;
+  }
+
   showDialogue(currentIndex);
 });
