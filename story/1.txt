@@ -1,0 +1,41 @@
+#scene ./img/scen/truonghoc.jpg
+
+[Null] *Nắng chiều nhuộm vàng mái tóc cô gái. Gió nhẹ thổi, cuốn theo những lời chưa kịp nói. Nhưng trong tim họ, điều quan trọng nhất đã được thổ lộ.*
+#music ./bgm/bg1.mp3
+[Lena] Hôm nay là ngày cuối cùng rồi... Mọi thứ sẽ thay đổi từ ngày mai.
+
+[Null] *Nắng chiều nhuộm vàng mái tóc cô gái. Gió nhẹ thổi, cuốn theo những lời chưa kịp nói. Nhưng trong tim họ, điều quan trọng nhất đã được thổ lộ.*
+
+[Kai:surprised] Lena? Cậu vẫn còn ở đây à? Trường sắp đóng cửa rồi đó.
+
+[Lena] Mình biết... Nhưng mình chỉ muốn ở lại thêm một chút. Chỗ này có quá nhiều kỷ niệm.
+
+[Kai] Ừm, mình cũng cảm thấy vậy. Nhớ lần đầu chúng ta gặp nhau ở thư viện không?
+
+[Lena:smile] Nhớ chứ. Cậu đã làm rơi quyển sách lên đầu mình mà còn không xin lỗi.
+
+[Kai:blush] Ơ kìa! Mình đã xin lỗi ngay sau đó còn gì! Nhưng mà, đúng là từ đó tụi mình trở nên thân thật.
+
+#scene ./img/scen/hoanghon.jpg
+
+[Lena] Mặt trời sắp lặn rồi... Ánh sáng buổi chiều nay thật đẹp.
+
+[Kai] Giống như khoảng thời gian học ở đây — đẹp, nhưng ngắn ngủi.
+
+[Lena] Mình vẫn chưa sẵn sàng để chia tay... với cậu.
+
+[Kai:shocked] Lena...
+
+[Lena] Thật lòng, mình đã muốn nói điều này từ lâu. Nhưng mình sợ mọi thứ sẽ thay đổi.
+
+#scene ./img/scen/toitam.jpg
+
+[Kai] Dù có chuyện gì xảy ra, mình vẫn ở đây. Dù ở xa, dù thời gian có trôi đi...
+
+[Lena:tears] Cảm ơn Kai... Cậu luôn khiến mình cảm thấy an toàn.
+
+[Kai:smile] Hãy hứa là tụi mình sẽ gặp lại. Ở một nơi khác. Một thời điểm khác. Nhưng là tụi mình, không thay đổi.
+
+[Lena] Ừ, mình hứa.
+
+#scene ./img/scen/hoanghon2.jpg
